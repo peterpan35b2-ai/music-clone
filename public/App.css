@@ -1,0 +1,418 @@
+.app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 12, 20, 0.82);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-top: 4px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+}
+.logo h1 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+.badge {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-3);
+  background: var(--surface);
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+/* Now Playing */
+.np-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px 0 24px;
+}
+
+.album-art {
+  width: 240px;
+  height: 240px;
+  max-width: 55vw;
+  max-height: 55vw;
+  border-radius: 12px;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+.album-art.playing .vinyl {
+  animation: spin 8s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinyl {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vinyl-groove {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+.vinyl-groove:nth-child(1) { inset: 10%; }
+.vinyl-groove:nth-child(2) { inset: 20%; }
+.vinyl-groove:nth-child(3) { inset: 30%; }
+.vinyl-label {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.np-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  margin-bottom: 6px;
+}
+.np-artist {
+  font-size: 15px;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Visualizer */
+.visualizer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  height: 28px;
+  margin-top: 16px;
+}
+.viz-bar {
+  width: 3px;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: height 0.08s ease;
+  opacity: 0.7;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+.ctrl-sec {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid var(--border);
+  font-size: 16px;
+}
+.ctrl-sec:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+  border-color: var(--accent);
+}
+.ctrl-sec:active { transform: scale(0.95); }
+.ctrl-play {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s ease;
+  font-size: 22px;
+}
+.ctrl-play:hover {
+  background: var(--accent-2);
+}
+.ctrl-play:active { transform: scale(0.95); }
+
+/* Progress */
+.progress-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 0 4px;
+}
+.time {
+  font-size: 11px;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+  font-family: 'SF Mono', monospace;
+  min-width: 36px;
+}
+
+/* Volume */
+.volume-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 4px;
+  border-top: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.vol-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text-3);
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  font-size: 16px;
+}
+.vol-btn:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+.vol-slider {
+  max-width: 100px;
+}
+
+/* Playlist */
+.playlist-section {
+  flex-shrink: 0;
+}
+.playlist-header {
+  margin-bottom: 10px;
+  padding: 0 4px;
+}
+.playlist-header h2 {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+.playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+.track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  border: 1px solid transparent;
+}
+.track:hover {
+  background: var(--surface-hover);
+}
+.track.active {
+  background: var(--surface-2);
+  border-color: var(--accent);
+}
+.track-num {
+  width: 28px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.track.active .track-num { color: var(--accent-2); }
+.track-info { flex: 1; min-width: 0; }
+.track-title {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.track-artist {
+  font-size: 12px;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+.track-dur {
+  font-size: 12px;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.track.active .track-title { color: var(--accent-2); }
+
+/* Playing bars */
+.playing-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+.playing-bars span {
+  width: 2px;
+  background: var(--accent-2);
+  border-radius: 1px;
+  animation: sound 0.5s ease-in-out infinite alternate;
+}
+.playing-bars span:nth-child(1) { height: 5px; animation-delay: 0s; }
+.playing-bars span:nth-child(2) { height: 10px; animation-delay: 0.15s; }
+.playing-bars span:nth-child(3) { height: 7px; animation-delay: 0.3s; }
+@keyframes sound {
+  0% { height: 4px; }
+  100% { height: 14px; }
+}
+
+/* Center messages */
+.center-msg {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-3);
+  font-size: 14px;
+  gap: 10px;
+}
+.center-msg .sub {
+  font-size: 12px;
+  opacity: 0.8;
+}
+.center-msg code {
+  background: var(--surface);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: 'SF Mono', monospace;
+  font-size: 12px;
+  color: var(--accent-2);
+}
+.spin {
+  animation: spin 1s linear infinite;
+  font-size: 20px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .content { padding: 16px; }
+  .album-art { width: 180px; height: 180px; }
+  .vinyl { width: 80px; height: 80px; }
+  .vinyl-label { width: 28px; height: 28px; font-size: 12px; }
+  .np-title { font-size: 20px; }
+  .np-artist { font-size: 13px; }
+  .controls { gap: 12px; }
+  .ctrl-sec { width: 40px; height: 40px; font-size: 14px; }
+  .ctrl-play { width: 52px; height: 52px; font-size: 18px; }
+  .playlist { max-height: 160px; }
+}
+
+@media (min-width: 1024px) {
+  .content { max-width: 560px; padding: 32px; }
+  .album-art { width: 280px; height: 280px; }
+  .vinyl { width: 120px; height: 120px; }
+  .np-title { font-size: 28px; }
+}
