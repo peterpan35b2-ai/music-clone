@@ -1,0 +1,5 @@
+# Mỗi dòng là 1 URL nhạc (.mp3)
+# Xóa comment và thay bằng link R2 của bạn
+https://your-bucket.r2.dev/song1.mp3
+https://your-bucket.r2.dev/song2.mp3
+https://your-bucket.r2.dev/song3.mp3

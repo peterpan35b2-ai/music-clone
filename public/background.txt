@@ -1,0 +1,3 @@
+# URL ảnh nền (1 dòng duy nhất)
+# Xóa comment và thay bằng link ảnh nền của bạn
+https://your-bucket.r2.dev/background.jpg
